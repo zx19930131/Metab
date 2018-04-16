@@ -4,5 +4,6 @@
 #SBATCH -n 16
 #SBATCH -p Long
 cd /home/xzh323/Metab
+module load matlab/R2016a-f
 matlab -nodisplay -nodesktop -r 'run /home/xzh323/Metab/MCMCMetab/test2.m'
 wait  
