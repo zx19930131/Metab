@@ -85,13 +85,13 @@ jcount = 1;
 for jruns = 1:((nruns*nthinning)+nburnin)
                          qnonnanacc = ~isnan(accepts);
                          accept_rate = sum(accepts(qnonnanacc))/length(accepts(qnonnanacc));
-                         if(jrungo>0) %after burn-in
-                         arWaitbar(jruns, (nruns*nthinning)+nburnin, sprintf('MCMC run (acceptance rate %4.1f%%)', ...
-                                                                             accept_rate*100));
-                         else
-                         arWaitbar(jruns, (nruns*nthinning)+nburnin, sprintf('MCMC burn-in (acceptance rate %4.1f%%)', ...
-                                                                             accept_rate*100));
-                         end
+%                          if(jrungo>0) %after burn-in
+%                          arWaitbar(jruns, (nruns*nthinning)+nburnin, sprintf('MCMC run (acceptance rate %4.1f%%)', ...
+%                                                                              accept_rate*100));
+%                          else
+%                          arWaitbar(jruns, (nruns*nthinning)+nburnin, sprintf('MCMC burn-in (acceptance rate %4.1f%%)', ...
+%                                                                              accept_rate*100));
+%                          end
                          
                          condi_accept = 0;
       for jGibb = 1:sum(ifFit)

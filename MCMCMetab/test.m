@@ -338,7 +338,9 @@ ode_fun = @PurineSynthesis;
 sigma = diag(Y_var);
 R = chol(sigma);
 
-for seed = 1:30
+matlabpool open 16
+
+parfor seed = 1:30
 rng(seed);
 Yobs = Yode + randn(1,length(Yode))*R;
 %[ps, ps_trial, chi2s, chi2s_trial, acceptance ] = MCMCMetab(Yobs, Yode, startp, muprior,sigmaprior, indexFit,1000, 500, 5,Xd,observed,MoleculeNumberInOneNanoMole,ode_fun);
