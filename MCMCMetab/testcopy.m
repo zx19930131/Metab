@@ -352,13 +352,13 @@ conf_interv(:,:,seed) = prctile(ps(:,3:4),[5 95],1);
 
 psTosave34 = transpose(ps(:,3:4));
 
-% name0 = 'Par3to4_sample';
-% name1 = strcat(name0,num2str(seed),'.txt');
-% 
-% fileIDs = fopen(name1,'w');
-% fprintf(fileIDs,'%12s %12s\n','par3','par4');
-% fprintf(fileIDs,'%12.6e %12.6e\n',psTosave34);
-% fclose(fileIDs);
+ name0 = 'Par3to4_sample';
+ name1 = strcat(name0,num2str(seed),'.txt');
+ 
+ fileIDs = fopen(name1,'w');
+ fprintf(fileIDs,'%12s %12s\n','par3','par4');
+ fprintf(fileIDs,'%12.6e %12.6e\n',psTosave34);
+ fclose(fileIDs);
 % 
 % fileID = fopen('Par3to4_stat01to30.txt','w');
 % fprintf(fileID,'%12s\n','samplemean');
