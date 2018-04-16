@@ -342,7 +342,7 @@ seed = 1;
 rng(seed);
 Yobs = Yode + randn(1,length(Yode))*R;
 %[ps, ps_trial, chi2s, chi2s_trial, acceptance ] = MCMCMetab(Yobs, Yode, startp, muprior,sigmaprior, indexFit,1000, 500, 5,Xd,observed,MoleculeNumberInOneNanoMole,ode_fun);
-[ps, ps_trial, chi2s, chi2s_trial, acceptance ] = Metab_GibbsWithMH(Yobs, Yode, startp, muprior,sigmaprior, indexFit,50, 10, 2,Xd,observed,MoleculeNumberInOneNanoMole,ode_fun);
+[ps, ps_trial, chi2s, chi2s_trial, acceptance ] = Metab_GibbsWithMH(Yobs, Yode, startp, muprior,sigmaprior, indexFit,30, 10, 2,Xd,observed,MoleculeNumberInOneNanoMole,ode_fun);
 
 sample_mm(seed,:) = mean(ps(:,1:5));
 variation_m(seed,:) = (sample_mm(seed,1:5)-OptimizeParameters(1:5))./sqrt(sigmaprior(1:5));

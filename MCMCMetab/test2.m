@@ -342,7 +342,7 @@ R = chol(sigma);
 nseed = 30;
 
 parfor seed = 1:nseed
-rng(seed);
+rng(seed+30);
 Yobs = Yode + randn(1,length(Yode))*R;
 %[ps, ps_trial, chi2s, chi2s_trial, acceptance ] = MCMCMetab(Yobs, Yode, startp, muprior,sigmaprior, indexFit,1000, 500, 5,Xd,observed,MoleculeNumberInOneNanoMole,ode_fun);
 [ps, ps_trial, chi2s, chi2s_trial, acceptance ] = Metab_GibbsWithMH(Yobs, Yode, startp, muprior,sigmaprior, indexFit,2000, 600, 5,Xd,observed,MoleculeNumberInOneNanoMole,ode_fun);
@@ -356,7 +356,7 @@ conf_interv(:,:,seed) = prctile(ps(:,3:4),[5 95],1);
 psTosave34 = transpose(ps(:,3:4));
 
 name0 = 'Par3to4_sample';
-name1 = strcat(name0,num2str(seed),'.txt');
+name1 = strcat(name0,num2str(seed+30),'.txt');
 
 fileIDs = fopen(name1,'w');
 fprintf(fileIDs,'%12s %12s\n','par3','par4');
@@ -365,8 +365,7 @@ fclose(fileIDs);
 
 end
 
-
-fileID = fopen('Par3to4_stat01to30.txt','w');
+fileID = fopen('Par3to4_stat31to60.txt','w');
 fprintf(fileID,'%12s\n','samplemean');
 for ii = 1:size(sample_mm,1)
     fprintf(fileID,'%12.6e\t',sample_mm(ii,:));
@@ -384,7 +383,7 @@ for kk = 1:size(se_sample,1)
 end
 fclose(fileID);
 
-fileID = fopen('Par3to4_CI01to30.txt','w');
+fileID = fopen('Par3to4_CI31to60.txt','w');
 fprintf(fileIDs,'%12s %12s %12s %12s\n','par3_low','par3_upp','par4_low','par4_upp');
 for ii = 1:3
     
