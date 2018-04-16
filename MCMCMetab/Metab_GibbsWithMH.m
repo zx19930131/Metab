@@ -198,7 +198,7 @@ jrungo = jrungo + 1;
 end
 
 %arWaitbar(-1);
-fprintf('done \n', secToHMS(toc));
+fprintf('done \n');%, secToHMS(toc));
 %mcmc_toc = toc;
 %ar.p = pReset;
 
