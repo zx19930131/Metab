@@ -4,5 +4,5 @@
 #SBATCH -n 16
 #SBATCH -p Long
 cd /home/xzh323/Metab
-matlab -nodisplay -nodesktop -r 'run /home/xzh323/Metab/MCMCMetab/test.m'
+matlab -nodisplay -nodesktop -r 'run /home/xzh323/Metab/MCMCMetab/test4.m'
 wait  
