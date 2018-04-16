@@ -73,12 +73,12 @@ jrungo = -nburnin+1;
                          %do_reflect_bounds = true;
                          
 % mcmc
-arWaitbar(0);
+%arWaitbar(0);
 naccepts = 30;
 accepts = nan(1,naccepts); %accept or not, only count for the most recent 30 ones
 i_accepts = 1;
 fprintf('MCMC sampling...')
-tic;
+%tic;
 %count_chain_reset = 0;
 jthin = 1;
 jcount = 1;
@@ -197,9 +197,9 @@ end
 jrungo = jrungo + 1;
 end
 
-arWaitbar(-1);
+%arWaitbar(-1);
 fprintf('done \n', secToHMS(toc));
-mcmc_toc = toc;
+%mcmc_toc = toc;
 %ar.p = pReset;
 
 
