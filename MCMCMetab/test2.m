@@ -340,6 +340,10 @@ R = chol(sigma);
 
 %matlabpool open 16
 nseed = 30;
+sample_mm = nan(nseed,5);
+variation_m = nan(nseed,5);
+se_sample = nan(nseed,2);
+conf_interv = nan(2,2,nseed);
 
 parfor seed = 1:nseed
 rng(seed+30);
