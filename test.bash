@@ -3,7 +3,7 @@
 #SBATCH -N 1
 #SBATCH -n 16
 #SBATCH -p Long
-./etc/profile.d/modules.sh
+. /etc/profile.d/modules.sh
 module load matlab/R2016a-f
 
 cd /home/xzh323/Metab
