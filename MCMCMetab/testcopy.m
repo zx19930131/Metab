@@ -343,7 +343,7 @@ variation_m = zeros(2,5);
 se_sample = zeros(2,2);
 conf_interv = zeros(2,2,2);
 
-pool = parpool(2);
+pool = matlabpool(2);
 
 parfor seed = 1:2
 rng(seed);
