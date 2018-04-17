@@ -343,7 +343,7 @@ variation_m = zeros(2,5);
 se_sample = zeros(2,2);
 conf_interv = zeros(2,2,2);
 
-parpool(2)
+pool = parpool(2);
 
 parfor seed = 1:2
 rng(seed);
@@ -368,6 +368,7 @@ psTosave34 = transpose(ps(:,3:4));
  fclose(fileIDs);
 end
 
+delete(pool)
 % 
 % fileID = fopen('Par3to4_stat01to30.txt','w');
 % fprintf(fileID,'%12s\n','samplemean');

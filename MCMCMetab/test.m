@@ -340,10 +340,12 @@ R = chol(sigma);
 
 %matlabpool open 16
 nseed = 30;
-sample_mm = nan(nseed,5);
-variation_m = nan(nseed,5);
-se_sample = nan(nseed,2);
-conf_interv = nan(2,2,nseed);
+sample_mm = zeros(nseed,5);
+variation_m = zeros(nseed,5);
+se_sample = zeros(nseed,2);
+conf_interv = zeros(2,2,nseed);
+
+parpool(16)
 
 parfor seed = 1:nseed
 rng(seed);
@@ -352,7 +354,7 @@ Yobs = Yode + randn(1,length(Yode))*R;
 [ps, ps_trial, chi2s, chi2s_trial, acceptance ] = Metab_GibbsWithMH(Yobs, Yode, startp, muprior,sigmaprior, indexFit,2000, 600, 5,Xd,observed,MoleculeNumberInOneNanoMole,ode_fun);
 
 sample_mm(seed,:) = mean(ps(:,1:5));
-variation_m(seed,:) = (sample_mm(seed,1:5)-OptimizeParameters(1:5))./sqrt(sigmaprior(1:5));
+variation_m(seed,:) = (sample_mm(seed,:)-OptimizeParameters(1:5))./sqrt(sigmaprior(1:5));
 se_sample(seed,:) = std(ps(:,3:4)); % se of the sample of par3 and par4
 
 conf_interv(:,:,seed) = prctile(ps(:,3:4),[5 95],1);
@@ -397,6 +399,7 @@ for ii = 1:3
     
 end
 fclose(fileID);
+
 
 %type Par3to4_CI01to30.txt
 
