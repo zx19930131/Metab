@@ -338,14 +338,21 @@ ode_fun = @PurineSynthesis;
 sigma = diag(Y_var);
 R = chol(sigma);
 
-seed = 1;
+sample_mm = zeros(2,5);
+variation_m = zeros(2,5);
+se_sample = zeros(2,2);
+conf_interv = zeros(2,2,2);
+
+pool = parpool(2);
+
+parfor seed = 1:2
 rng(seed);
 Yobs = Yode + randn(1,length(Yode))*R;
 %[ps, ps_trial, chi2s, chi2s_trial, acceptance ] = MCMCMetab(Yobs, Yode, startp, muprior,sigmaprior, indexFit,1000, 500, 5,Xd,observed,MoleculeNumberInOneNanoMole,ode_fun);
-[ps, ps_trial, chi2s, chi2s_trial, acceptance ] = Metab_GibbsWithMH(Yobs, Yode, startp, muprior,sigmaprior, indexFit,30, 10, 2,Xd,observed,MoleculeNumberInOneNanoMole,ode_fun);
+[ps, ps_trial, chi2s, chi2s_trial, acceptance ] = Metab_GibbsWithMH(Yobs, Yode, startp, muprior,sigmaprior, indexFit,5, 2, 2,Xd,observed,MoleculeNumberInOneNanoMole,ode_fun);
 
 sample_mm(seed,:) = mean(ps(:,1:5));
-variation_m(seed,:) = (sample_mm(seed,1:5)-OptimizeParameters(1:5))./sqrt(sigmaprior(1:5));
+variation_m(seed,:) = (sample_mm(seed,:)-OptimizeParameters(1:5))./sqrt(sigmaprior(1:5));
 se_sample(seed,:) = std(ps(:,3:4)); % se of the sample of par3 and par4
 
 conf_interv(:,:,seed) = prctile(ps(:,3:4),[5 95],1);
@@ -359,6 +366,9 @@ psTosave34 = transpose(ps(:,3:4));
  fprintf(fileIDs,'%12s %12s\n','par3','par4');
  fprintf(fileIDs,'%12.6e %12.6e\n',psTosave34);
  fclose(fileIDs);
+end
+
+delete(pool)
 % 
 % fileID = fopen('Par3to4_stat01to30.txt','w');
 % fprintf(fileID,'%12s\n','samplemean');
